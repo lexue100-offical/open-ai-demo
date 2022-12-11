@@ -1,8 +1,5 @@
-import { useState } from "react";
-import produce from "immer";
-import { Wrapper } from "../../components/Wrapper";
-import { Input } from "../../components/Input";
 import { CreateEditResponse } from "openai";
+import axios from "axios";
 import { Instruction } from "../../components/Instruction";
 
 type Prompt = {
@@ -26,17 +23,13 @@ const EXAMPLE: Prompt[] = [
 ];
 
 async function edit(input: string, instruction: string) {
-	const reseponse: CreateEditResponse = await fetch(
-		"http://localhost:3000/api/openai",
-		{
-			method: "POST",
-			body: JSON.stringify({
-				type: "edit-text",
-				input,
-				instruction,
-			}),
-		}
-	).then(s => s.json());
+	const reseponse = await axios
+		.post<CreateEditResponse>("http://localhost:3000/api/openai", {
+			type: "edit-text",
+			input,
+			instruction,
+		})
+		.then(s => s.data);
 	console.log(JSON.stringify(reseponse, null, 2));
 	return reseponse;
 }

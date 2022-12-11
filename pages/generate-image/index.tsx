@@ -1,19 +1,16 @@
+import axios from "axios";
 import type { ImagesResponse } from "openai";
 import { FormEventHandler, useState } from "react";
 import { Wrapper } from "../../components/Wrapper";
 
 async function queryImage(prompt: string, n?: number) {
-	const reseponse: ImagesResponse = await fetch(
-		"http://localhost:3000/api/openai",
-		{
-			method: "POST",
-			body: JSON.stringify({
-				prompt,
-				type: "image-generation",
-				n,
-			}),
-		}
-	).then(s => s.json());
+	const reseponse: ImagesResponse = await axios
+		.post("http://localhost:3000/api/openai", {
+			prompt,
+			type: "image-generation",
+			n,
+		})
+		.then(s => s.data);
 	console.log(JSON.stringify(reseponse, null, 2));
 	return reseponse.data;
 }
