@@ -1,5 +1,6 @@
 import type { ImagesResponse } from "openai";
 import { FormEventHandler, useState } from "react";
+import { Wrapper } from "../../components/Wrapper";
 
 async function queryImage(prompt: string, n?: number) {
 	const reseponse: ImagesResponse = await fetch(
@@ -41,7 +42,7 @@ export default function GenerateImagePage() {
 	};
 
 	return (
-		<div className="p-6 bg-slate-50">
+		<Wrapper>
 			<form onSubmit={makeImage} className="flex space-x-1">
 				<input
 					type="text"
@@ -49,17 +50,19 @@ export default function GenerateImagePage() {
 					onChange={e => setValue(e.target.value)}
 					className="px-2 py-1 border border-blue-400 rounded"
 				/>
-				<select
-					value={generateImageCount}
-					placeholder="生成图片数量"
-					onChange={e => setGenerateImageCount(+e.target.value)}
-				>
-					<option value={1}>1</option>
-					<option value={2}>2</option>
-					<option value={3}>3</option>
-					<option value={4}>4</option>
-					<option value={5}>5</option>
-				</select>
+				<label>
+					<select
+						value={generateImageCount}
+						placeholder="生成图片数量"
+						onChange={e => setGenerateImageCount(+e.target.value)}
+					>
+						<option value={1}>1</option>
+						<option value={2}>2</option>
+						<option value={3}>3</option>
+						<option value={4}>4</option>
+						<option value={5}>5</option>
+					</select>
+				</label>
 				<button className="px-2.5 py-1 rounded-lg bg-green-100 hover:bg-green-200 text-green-500 mx-1">
 					生成图片
 				</button>
@@ -92,6 +95,6 @@ export default function GenerateImagePage() {
 					))}
 				</div>
 			)}
-		</div>
+		</Wrapper>
 	);
 }

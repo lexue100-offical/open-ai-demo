@@ -21,5 +21,24 @@ export const generateImage = async (prompt: string, n?: number) => {
 	return data;
 };
 
+export const editText = async (input: string, instruction: string) => {
+	const { data } = await openai.createEdit({
+		model: "text-davinci-edit-001",
+		input,
+		instruction,
+	});
+	return data;
+};
+
+export const generateCode = async (input: string, instruction: string) => {
+	const { data } = await openai.createEdit({
+		model: "code-davinci-edit-001",
+		input,
+		instruction,
+	});
+    console.log(data)
+	return data;
+};
+
 export type CompleteResponse = Awaited<ReturnType<typeof getCompleteResponse>>;
 // console.log(completion.data.choices[0].text);

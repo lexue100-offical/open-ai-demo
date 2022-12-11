@@ -1,7 +1,3 @@
-import { useState } from "react";
-import produce from "immer";
-import { Wrapper } from "../../components/Wrapper";
-import { Input } from "../../components/Input";
 import { CreateEditResponse } from "openai";
 import { Instruction } from "../../components/Instruction";
 
@@ -14,13 +10,13 @@ type Prompt = {
 
 const EXAMPLE: Prompt[] = [
 	{
-		input: "GPT-3 is a very nice AI\nThat's pretty good at writing replies\nWhen it's asked a question\nIt gives its suggestion\nThis is a poem it made that rhymes",
-		instruction: "Make this in the voice of GPT-3",
+		input: "",
+		instruction: "使用Python写一个计算斐波那契数列的函数",
 		output: "",
 	},
 	{
-		input: "I have a apple\nhe had diner\nshw willl bee cleaning thhe hoouse today night",
-		instruction: "Remove typos and write two more sentences",
+		input: "def add_num(a, b):\n  return a + b",
+		instruction: "基于Python3.9，修改该函数，使add_num函数的参数带有类型",
 		output: "",
 	},
 ];
@@ -31,7 +27,7 @@ async function edit(input: string, instruction: string) {
 		{
 			method: "POST",
 			body: JSON.stringify({
-				type: "edit-text",
+				type: "generate-code",
 				input,
 				instruction,
 			}),
@@ -41,6 +37,6 @@ async function edit(input: string, instruction: string) {
 	return reseponse;
 }
 
-export default function EditPage() {
+export default function GenerateCodePage() {
 	return <Instruction queryFunction={edit} initalState={EXAMPLE} />;
 }
