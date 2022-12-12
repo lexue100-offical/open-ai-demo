@@ -28,29 +28,28 @@ export default function Home() {
 	return (
 		<div className="bg-slate-50 grid grid-cols-3 gap-3 p-6 mx-auto">
 			<Card
-				title="编辑"
+				title="编辑文字"
 				href="/edit"
-				desc="Edits Given a prompt and an instruction, the model will
-					return an edited version of the prompt"
+				desc="根据指令编辑文字"
 				externalUrl="https://beta.openai.com/docs/api-reference/edits"
 			/>
 			<Card
 				title="生成图片"
 				href="/generate-image"
-				desc="Given a prompt and/or an input image, the model will generate a new image."
+				desc="根据描述生成图片"
 				externalUrl="https://beta.openai.com/docs/api-reference/embeddings/create"
 			/>
 			<Card
 				title="生成代码"
 				href="/generate-code"
-				desc="You provide some code and an instruction for how to modify it, and the code-davinci-edit-001 model will attempt to edit it accordingly."
+				desc="根据指令生成、修改代码"
 				externalUrl="https://beta.openai.com/docs/guides/code/editing-code"
 			/>
 			<Card
 				title="生成故事"
 				href="/generate-story"
-				desc="You provide some code and an instruction for how to modify it, and the code-davinci-edit-001 model will attempt to edit it accordingly."
-				externalUrl="https://beta.openai.com/docs/guides/code/editing-code"
+				desc="根据指令生成故事以及图片"
+				externalUrl="https://beta.openai.com/docs/guides/completion/prompt-design"
 			/>
 		</div>
 	);
