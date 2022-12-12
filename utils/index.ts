@@ -44,16 +44,21 @@ export const generateStory = async (prompt: string) => {
 	const { data: storyData } = await openai.createCompletion({
 		model: "text-davinci-002",
 		prompt,
-		max_tokens: 1000
+		max_tokens: 1000,
 	});
 	const story = storyData.choices[0].text;
-	console.log({story})
 	if (!story) throw new Error("没有生成story");
-	const { data } = await openai.createImage({
-		prompt,
-		n: 10,
-	});
-	
+	const { data } = await openai
+		.createImage({
+			prompt: `${prompt}\n${story}`,
+			n: 9,
+			size: "512x512",
+		})
+		.catch(err => {
+			console.log(err);
+			return { data: { data: [] } };
+		});
+
 	return {
 		story,
 		images: data.data.map(s => s.url!),
