@@ -24,7 +24,7 @@ const EXAMPLE: Prompt[] = [
 
 async function edit(input: string, instruction: string) {
 	const reseponse = await axios
-		.post<CreateEditResponse>("http://localhost:3000/api/openai", {
+		.post<CreateEditResponse>("/api/openai", {
 			type: "generate-code",
 			input,
 			instruction,

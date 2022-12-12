@@ -1,11 +1,12 @@
 import axios from "axios";
 import type { ImagesResponse } from "openai";
 import { FormEventHandler, useState } from "react";
+import { Loading } from "../../components/Loading";
 import { Wrapper } from "../../components/Wrapper";
 
 async function queryImage(prompt: string, n?: number) {
 	const reseponse: ImagesResponse = await axios
-		.post("http://localhost:3000/api/openai", {
+		.post("/api/openai", {
 			prompt,
 			type: "image-generation",
 			n,
@@ -26,9 +27,12 @@ export default function GenerateImagePage() {
 	const [images, setImages] = useState<{ urls: string[]; prompt: string }[]>(
 		[]
 	);
+	const [loading, setLoading] = useState(false);
 	const makeImage: FormEventHandler<HTMLFormElement> = async e => {
 		e.preventDefault();
+		setLoading(true);
 		const urls = await queryImage(value, generateImageCount);
+		setLoading(false);
 		setImages(prev => {
 			const newImages = {
 				urls: urls.filter((s): s is Result => !!s.url).map(s => s.url),
@@ -40,7 +44,7 @@ export default function GenerateImagePage() {
 
 	return (
 		<Wrapper>
-			<form onSubmit={makeImage} className="flex space-x-1">
+			<form onSubmit={makeImage} className="relative flex space-x-1">
 				<input
 					type="text"
 					value={value}
@@ -60,9 +64,13 @@ export default function GenerateImagePage() {
 						<option value={5}>5</option>
 					</select>
 				</label>
-				<button className="px-2.5 py-1 rounded-lg bg-green-100 hover:bg-green-200 text-green-500 mx-1">
+				<button
+					disabled={loading}
+					className="px-2.5 py-1 rounded-lg bg-green-100 hover:bg-green-200 text-green-500 mx-1"
+				>
 					生成图片
 				</button>
+				{loading && <Loading />}
 			</form>
 			<div>
 				<h2>示例语句</h2>

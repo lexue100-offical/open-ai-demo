@@ -10,7 +10,7 @@ type FormProps = {
 
 async function run(prompt: string) {
 	const reseponse = await axios
-		.post<CompleteResponse>("http://localhost:3000/api/openai", {
+		.post<CompleteResponse>("/api/openai", {
 			prompt,
 			type: "text-complete",
 		})
