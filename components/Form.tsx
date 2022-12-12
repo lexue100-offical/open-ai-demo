@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler } from "react";
-import { CompleteResponse } from "../utils";
+import type { CreateCompletionResponse } from "openai";
 import axios from "axios";
 
 type FormProps = {
@@ -10,7 +10,7 @@ type FormProps = {
 
 async function run(prompt: string) {
 	const reseponse = await axios
-		.post<CompleteResponse>("/api/openai", {
+		.post<CreateCompletionResponse>("/api/openai", {
 			prompt,
 			type: "text-complete",
 		})

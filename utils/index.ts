@@ -36,9 +36,6 @@ export const generateCode = async (input: string, instruction: string) => {
 		input,
 		instruction,
 	});
-    console.log(data)
+    
 	return data;
 };
-
-export type CompleteResponse = Awaited<ReturnType<typeof getCompleteResponse>>;
-// console.log(completion.data.choices[0].text);

@@ -10,9 +10,11 @@ type CardProps = {
 const Card = ({ title, href, desc, externalUrl }: CardProps) => {
 	return (
 		<div className="p-3 rounded bg-white shadow cursor-pointer">
-			<h2 className="text-2xl font-semibold">{title}</h2>
 			<Link href={href}>
-				<h3 className="text-lg font-medium">{desc}</h3>
+				<div>
+					<h2 className="text-2xl font-semibold">{title}</h2>
+					<h3 className="text-lg font-medium">{desc}</h3>
+				</div>
 			</Link>
 			{/* <h2>{desc}</h2> */}
 			<a className="underline mt-2" href={externalUrl}>

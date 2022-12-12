@@ -5,6 +5,7 @@ import {
 	generateImage,
 	getCompleteResponse,
 } from "../../utils";
+import { isEmpty } from "lodash-es";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -27,13 +28,15 @@ export default async function handler(
 				break;
 			case "generate-code":
 				response = await generateCode(input, instruction);
+				break;
 			default:
 				throw new Error("参数错误");
+			// break
 		}
 		console.log({ response });
 		res.status(200).json(response);
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json(response);
+		return res.status(isEmpty(response) ? 500 : 200).json(response);
 	}
 }

@@ -96,7 +96,7 @@ export const Instruction = <T extends unknown>({
 				>
 					<div className="flex flex-col flex-1 space-y-2">
 						<textarea
-							className="p-3 rounded resize-none border border-blue-200 min-h-[10rem]"
+							className="p-3 rounded resize-none border border-blue-200 min-h-[12rem]"
 							value={s.input}
 							onChange={e => updateInput(index, e.target.value)}
 						/>
@@ -121,7 +121,7 @@ export const Instruction = <T extends unknown>({
 						{s.loading && <Loading />}
 						<textarea
 							value={s.output}
-							className="p-3 w-full rounded resize-none readonly:opacity-90 border border-slate-300 min-h-[10rem]"
+							className="p-3 w-full rounded resize-none readonly:opacity-90 border border-slate-300 min-h-[12rem]"
 							readOnly
 							placeholder="输出"
 							onChange={e => updateOutput(index, e.target.value)}
