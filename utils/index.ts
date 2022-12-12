@@ -47,6 +47,7 @@ export const generateStory = async (prompt: string) => {
 		max_tokens: 1000
 	});
 	const story = storyData.choices[0].text;
+	console.log({story})
 	if (!story) throw new Error("没有生成story");
 	const { data } = await openai.createImage({
 		prompt,

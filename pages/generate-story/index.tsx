@@ -13,7 +13,6 @@ async function queryStory(prompt: string) {
 			prompt,
 		})
 		.then(s => s.data);
-	console.log(JSON.stringify(reseponse, null, 2));
 	return reseponse;
 }
 
@@ -22,9 +21,9 @@ export default function GenerateStoryPage() {
 		"写出一个关于中国80年代的工人阶级的浪漫爱情故事"
 	);
 	const [output, setOutput] = useState("");
-	const { data, isFetching, refetch, isError, error } = useQuery({
+	const { isFetching, refetch, isError, error } = useQuery({
 		queryFn: () => queryStory(value),
-		queryKey: [value],
+		queryKey: ["generate-story", value],
 		enabled: false,
 		onSuccess: ({ story, images }) => {
 			setOutput(story);
@@ -38,16 +37,18 @@ export default function GenerateStoryPage() {
 	};
 	return (
 		<Wrapper>
-			<form onSubmit={onSubmit} className="space-y-2">
+			<form onSubmit={onSubmit} className="relative space-y-2">
 				{isError && <Toast>{(error as AxiosError).toString()}</Toast>}
+				{isFetching && <Loading />}
 				<div className="flex space-x-4">
-					{isFetching && <Loading />}
 					<Input
 						type="text"
 						value={value}
 						onChange={e => setValue(e.target.value)}
 					/>
-					<Button type="submit">提交</Button>
+					<Button disabled={isFetching} type="submit">
+						提交
+					</Button>
 				</div>
 				<Textarea
 					readOnly

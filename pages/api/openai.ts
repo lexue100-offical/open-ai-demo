@@ -8,6 +8,7 @@ import {
 } from "../../utils";
 import { isEmpty } from "lodash-es";
 import { NextApiRequest, NextApiResponse } from "next";
+import { AxiosError } from "axios";
 
 export default async function handler(
 	req: NextApiRequest,
@@ -37,10 +38,12 @@ export default async function handler(
 				throw new Error("参数错误");
 			// break
 		}
-		console.log({ response });
 		res.status(200).json(response);
 	} catch (error) {
-		console.log(error);
+		// console.log(error)
+		if (error instanceof AxiosError) {
+			return res.status(500).json(error)
+		}
 		return res.status(isEmpty(response) ? 500 : 200).json(response);
 	}
 }
