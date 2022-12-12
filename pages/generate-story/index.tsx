@@ -8,10 +8,16 @@ import { Loading } from "../../components/Loading";
 
 async function queryStory(prompt: string) {
 	const reseponse = await axios
-		.post<{ story: string; images: string[] }>("/api/openai", {
-			type: "generate-story",
-			prompt,
-		})
+		.post<{ story: string; images: string[] }>(
+			"/api/openai",
+			{
+				type: "generate-story",
+				prompt,
+			},
+			{
+				timeout: 60 * 1000,
+			}
+		)
 		.then(s => s.data);
 	return reseponse;
 }
