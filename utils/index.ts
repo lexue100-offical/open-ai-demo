@@ -2,7 +2,11 @@ import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
 	apiKey: process.env.OPENAI_API_KEY,
+	baseOptions: {
+		timeout: 60 * 1000,
+	},
 });
+
 const openai = new OpenAIApi(configuration);
 
 export const getCompleteResponse = async (prompt?: string) => {
@@ -44,7 +48,7 @@ export const generateStory = async (prompt: string) => {
 	const { data: storyData } = await openai.createCompletion({
 		model: "text-davinci-002",
 		prompt,
-		max_tokens: 1000,
+		max_tokens: 600,
 	});
 	const story = storyData.choices[0].text;
 	if (!story) throw new Error("没有生成story");
