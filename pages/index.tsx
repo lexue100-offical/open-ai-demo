@@ -46,6 +46,12 @@ export default function Home() {
 				desc="You provide some code and an instruction for how to modify it, and the code-davinci-edit-001 model will attempt to edit it accordingly."
 				externalUrl="https://beta.openai.com/docs/guides/code/editing-code"
 			/>
+			<Card
+				title="生成故事"
+				href="/generate-story"
+				desc="You provide some code and an instruction for how to modify it, and the code-davinci-edit-001 model will attempt to edit it accordingly."
+				externalUrl="https://beta.openai.com/docs/guides/code/editing-code"
+			/>
 		</div>
 	);
 }

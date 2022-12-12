@@ -4,6 +4,7 @@ import {
 	generateCode,
 	generateImage,
 	getCompleteResponse,
+	generateStory,
 } from "../../utils";
 import { isEmpty } from "lodash-es";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -28,6 +29,9 @@ export default async function handler(
 				break;
 			case "generate-code":
 				response = await generateCode(input, instruction);
+				break;
+			case "generate-story":
+				response = await generateStory(prompt);
 				break;
 			default:
 				throw new Error("参数错误");

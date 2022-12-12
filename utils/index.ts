@@ -36,6 +36,25 @@ export const generateCode = async (input: string, instruction: string) => {
 		input,
 		instruction,
 	});
-    
+
 	return data;
+};
+
+export const generateStory = async (prompt: string) => {
+	const { data: storyData } = await openai.createCompletion({
+		model: "text-davinci-002",
+		prompt,
+		max_tokens: 1000
+	});
+	const story = storyData.choices[0].text;
+	if (!story) throw new Error("没有生成story");
+	const { data } = await openai.createImage({
+		prompt,
+		n: 10,
+	});
+	
+	return {
+		story,
+		images: data.data.map(s => s.url!),
+	};
 };
