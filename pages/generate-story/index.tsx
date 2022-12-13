@@ -24,7 +24,7 @@ async function queryStory(prompt: string) {
 
 export default function GenerateStoryPage() {
 	const [value, setValue] = useState(
-		"写出一个关于中国80年代的工人阶级的浪漫爱情故事"
+		"Write a ten part children story about a robot befriending a deer in the 1960s"
 	);
 	const [output, setOutput] = useState("");
 	const { isFetching, refetch, isError, error } = useQuery({
